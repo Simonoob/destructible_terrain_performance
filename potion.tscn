@@ -1,0 +1,40 @@
+[gd_scene load_steps=6 format=3 uid="uid://bloadsxobtbic"]
+
+[ext_resource type="Texture2D" uid="uid://duxxjbjrwa78n" path="res://assets/Tiles/tile_0114.png" id="1_fkud1"]
+[ext_resource type="Script" path="res://potion.gd" id="1_xvpgj"]
+[ext_resource type="PackedScene" uid="uid://uunqdnmdnuxe" path="res://explosion.tscn" id="2_3wdvs"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_0gagg"]
+radius = 9.41934
+height = 28.258
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_hrtg1"]
+radius = 21.0238
+
+[node name="potion" type="RigidBody2D"]
+collision_layer = 0
+collision_mask = 4
+max_contacts_reported = 5
+contact_monitor = true
+script = ExtResource("1_xvpgj")
+explosion_scene = ExtResource("2_3wdvs")
+
+[node name="sprite" type="Sprite2D" parent="."]
+scale = Vector2(0.972096, 0.972096)
+texture = ExtResource("1_fkud1")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+scale = Vector2(0.425816, 0.424658)
+shape = SubResource("CapsuleShape2D_0gagg")
+
+[node name="destruction_Polygon2D" type="Polygon2D" parent="."]
+scale = Vector2(1.40181, 1.392)
+color = Color(1, 1, 1, 0)
+polygon = PackedVector2Array(-44, 12, -38, 12, -38, 25, -30, 25, -29, 31, -19, 31, -18, 40, -10, 40, -7, 41, -7, 32, -5, 34, 3, 44, 5, 39, 16, 42, 22, 25, 32, 33, 35, 17, 36, 17, 39, 9, 40, 9, 44, 2, 38, -5, 43, -13, 33, -25, 28, -34, 19, -30, 19, -37, 8, -38, 8, -42, -1, -41, -9, -48, -11, -37, -19, -38, -19, -16, -31, -25, -30, -15, -42, -15, -23, 1, -41, 1, -37, 4)
+
+[node name="collision_area" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="collision_area"]
+shape = SubResource("CircleShape2D_hrtg1")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

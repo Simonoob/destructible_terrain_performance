@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://w1j4rfy2q3vl"]
+
+[ext_resource type="Script" path="res://quadrantsManager.gd" id="1_jvqje"]
+
+[node name="quadrantsManager" type="Node2D"]
+script = ExtResource("1_jvqje")

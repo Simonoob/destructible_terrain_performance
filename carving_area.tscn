@@ -1,0 +1,19 @@
+[gd_scene load_steps=3 format=3 uid="uid://dyuecegi7nnp7"]
+
+[ext_resource type="Script" path="res://carving_area.gd" id="1_6cb1l"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_k1gnm"]
+radius = 48.2597
+
+[node name="carving_area" type="Node2D"]
+script = ExtResource("1_6cb1l")
+
+[node name="Polygon2D" type="Polygon2D" parent="."]
+scale = Vector2(1, 0.993002)
+color = Color(0, 0.694118, 0.831373, 1)
+polygon = PackedVector2Array(-44, 12, -38, 12, -38, 25, -30, 25, -29, 31, -19, 31, -18, 40, -10, 40, -7, 41, -7, 32, -5, 34, 3, 44, 5, 39, 16, 42, 22, 25, 32, 33, 35, 17, 36, 17, 39, 9, 40, 9, 44, 2, 38, -5, 43, -13, 33, -25, 28, -34, 19, -30, 19, -37, 8, -38, 8, -42, -1, -41, -9, -48, -11, -37, -19, -38, -19, -16, -31, -25, -30, -15, -42, -15, -23, 1, -41, 1, -37, 4)
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("CircleShape2D_k1gnm")

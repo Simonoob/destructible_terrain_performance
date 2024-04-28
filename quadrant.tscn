@@ -1,0 +1,10 @@
+[gd_scene load_steps=2 format=3 uid="uid://dssoxe1w2css1"]
+
+[ext_resource type="Script" path="res://quadrant.gd" id="1_uwyks"]
+
+[node name="quadrant" type="Node2D"]
+script = ExtResource("1_uwyks")
+
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+collision_layer = 7
+collision_mask = 0

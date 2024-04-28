@@ -1,0 +1,44 @@
+[gd_scene load_steps=7 format=3 uid="uid://b28wydl4jdn30"]
+
+[ext_resource type="Script" path="res://wizard.gd" id="1_goksk"]
+[ext_resource type="Texture2D" uid="uid://crcdo7l3g7ple" path="res://assets/Tiles/tile_0084.png" id="1_n3je7"]
+[ext_resource type="PackedScene" uid="uid://bloadsxobtbic" path="res://potion.tscn" id="2_3fmom"]
+[ext_resource type="Texture2D" uid="uid://c3xal5yyp1p5h" path="res://assets/Tiles/tile_0101.png" id="3_t1d8y"]
+[ext_resource type="Texture2D" uid="uid://cvvilicc3cd5u" path="res://assets/Tiles/tile_0060.png" id="4_dhapr"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_o28sq"]
+radius = 9.0
+height = 18.0
+
+[node name="wizard" type="CharacterBody2D"]
+script = ExtResource("1_goksk")
+weapon_projectile = ExtResource("2_3fmom")
+
+[node name="characterSprite" type="Sprite2D" parent="."]
+texture = ExtResource("1_n3je7")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CapsuleShape2D_o28sq")
+
+[node name="reticuleAnchor" type="Node2D" parent="."]
+unique_name_in_owner = true
+
+[node name="aim" type="Sprite2D" parent="reticuleAnchor"]
+position = Vector2(32.44, 0)
+scale = Vector2(0.68, 0.68)
+texture = ExtResource("3_t1d8y")
+
+[node name="aim2" type="Sprite2D" parent="reticuleAnchor"]
+position = Vector2(47.44, 0)
+scale = Vector2(0.96, 0.96)
+texture = ExtResource("3_t1d8y")
+
+[node name="aim3" type="Sprite2D" parent="reticuleAnchor"]
+position = Vector2(67.44, 0)
+scale = Vector2(1.44, 1.44)
+texture = ExtResource("3_t1d8y")
+
+[node name="reticule" type="Sprite2D" parent="reticuleAnchor"]
+unique_name_in_owner = true
+position = Vector2(99, 0)
+texture = ExtResource("4_dhapr")

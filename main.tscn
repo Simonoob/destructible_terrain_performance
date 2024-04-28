@@ -1,0 +1,70 @@
+[gd_scene load_steps=14 format=3 uid="uid://cobn0bfld8dkd"]
+
+[ext_resource type="Script" path="res://main.gd" id="1_ecia5"]
+[ext_resource type="Script" path="res://SubViewport.gd" id="2_2cg73"]
+[ext_resource type="PackedScene" uid="uid://w1j4rfy2q3vl" path="res://quadrants_manager.tscn" id="2_ptv2n"]
+[ext_resource type="PackedScene" uid="uid://dyuecegi7nnp7" path="res://carving_area.tscn" id="2_q5dx7"]
+[ext_resource type="Texture2D" uid="uid://cwj2ylufdj680" path="res://assets/worms_map.png" id="3_b8r03"]
+[ext_resource type="Script" path="res://circleDraw.gd" id="3_l71yi"]
+[ext_resource type="Shader" path="res://damage_map.gdshader" id="3_mqbyp"]
+[ext_resource type="Script" path="res://Polygon2D.gd" id="4_wmftr"]
+[ext_resource type="PackedScene" uid="uid://b28wydl4jdn30" path="res://wizard.tscn" id="5_y6082"]
+[ext_resource type="PackedScene" uid="uid://c2yrp22av5tn" path="res://debug_camera.tscn" id="6_iymj7"]
+[ext_resource type="Texture2D" uid="uid://dln25smnoibgh" path="res://assets/rigid_sprite.png" id="7_hjldb"]
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_abn6f"]
+viewport_path = NodePath("map/Sprite2D/damageMap")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_afvh4"]
+resource_local_to_scene = true
+shader = ExtResource("3_mqbyp")
+shader_parameter/destruction_mask = SubResource("ViewportTexture_abn6f")
+
+[node name="main" type="Node2D"]
+script = ExtResource("1_ecia5")
+
+[node name="map" type="Node2D" parent="."]
+
+[node name="Sprite2D" type="Sprite2D" parent="map"]
+unique_name_in_owner = true
+material = SubResource("ShaderMaterial_afvh4")
+position = Vector2(786, 667)
+texture = ExtResource("3_b8r03")
+
+[node name="damageMap" type="SubViewport" parent="map/Sprite2D"]
+unique_name_in_owner = true
+disable_3d = true
+transparent_bg = true
+size = Vector2i(1280, 1280)
+render_target_clear_mode = 1
+render_target_update_mode = 4
+script = ExtResource("2_2cg73")
+
+[node name="Polygon2D" type="Polygon2D" parent="map/Sprite2D/damageMap"]
+visible = false
+color = Color(0, 0, 0, 1)
+polygon = PackedVector2Array(1070, 554, 1304, 382, 967, 226)
+script = ExtResource("4_wmftr")
+
+[node name="circleDraw" type="Sprite2D" parent="map/Sprite2D/damageMap"]
+unique_name_in_owner = true
+texture_filter = 1
+texture_repeat = 1
+texture = ExtResource("7_hjldb")
+script = ExtResource("3_l71yi")
+
+[node name="quadrantsManager" parent="map" node_paths=PackedStringArray("sprite", "carving_area") instance=ExtResource("2_ptv2n")]
+unique_name_in_owner = true
+scale = Vector2(1, 0.997905)
+sprite = NodePath("../Sprite2D")
+carving_area = NodePath("../../carvingArea")
+
+[node name="carvingArea" parent="." instance=ExtResource("2_q5dx7")]
+visible = false
+
+[node name="wizard" parent="." instance=ExtResource("5_y6082")]
+position = Vector2(915, 481)
+
+[node name="debugCamera" parent="wizard" instance=ExtResource("6_iymj7")]
+position = Vector2(2.08165e-12, -40)
+zoom = Vector2(2, 2)
